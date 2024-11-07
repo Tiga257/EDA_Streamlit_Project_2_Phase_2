@@ -43,10 +43,10 @@ def home_page():
                         """)
         
     # adding embedded link
-    st.video("https://www.youtube.com/watch?v=ocMd2loRfWE, autoplay=True")
+    st.video("Telco_churnr… (2) - JupyterLab and 2 more pages - Personal - Microsoft​ Edge 2024-11-07 18-36-09")
 
     # adding clickable link
-    st.markdown("[Watch a Demo](https://www.youtube.com/watch?v=ocMd2loRfWE)")
+    st.markdown("Telco_churnr… (2) - JupyterLab and 2 more pages - Personal - Microsoft​ Edge 2024-11-07 18-36-09")
     
     #adding an image/method 1
     #st.image(r"C:\Users\ADMIN\Downloads\download.jpg")
