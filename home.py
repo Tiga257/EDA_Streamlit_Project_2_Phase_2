@@ -6,8 +6,8 @@ from PIL import Image
 #st.image(Image)
 
 def home_page():
+    st.title("Welcome to the home page")
     st.write("Telco Churn Classification Project")
-
     st.markdown(""" This uses machine learning to classify whether a customer is likely to churn or not""")
     st.subheader("Instructions")
     st.markdown("""
