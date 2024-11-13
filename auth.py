@@ -18,7 +18,7 @@ def login_form():
     password = st.text_input("Password", type="password", key="password_input")
 
     if st.button("Login"):
-        if username == "admin" and password == "Thegame":  # Simple login check
+        if username == "admin" and password == "password":  # Simple login check
             st.session_state.authenticated = True
             st.success("Successfully logged in!")
         else:
