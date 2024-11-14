@@ -13,6 +13,7 @@
 - [Acknowledgments](#acknowledgments)
 - [Contact](#contact)
 - [Troubleshooting](#troubleshooting)
+- [FAQ](#faq)
 - [Changelog](#changelog)
 - [Future Development](#future-development)
 - [Support and Maintenance](#support-and-maintenance)
@@ -111,7 +112,7 @@ This advanced telecommunications customer churn prediction platform leverages ma
 ### Installation
 1. Clone the repository: 
     ```bash
-    git clone https://github.com/your-repo/telecom-churn-prediction.git
+    git clone https://github.com/Tiga257/EDA_Streamlit_Project_2_Phase_2
     ```
 2. Install dependencies:
     ```bash
@@ -165,19 +166,34 @@ This project is licensed under the MIT License.
 ---
 
 ## Acknowledgments
-Special thanks to [Name] for their contributions to the project. Inspired by [Project/Research Paper].
+Special thanks to [Portia Bentum] for their contributions to the project. Inspired by [Azubi Machine Learning Program].
 
 ---
 
 ## Contact
-- Email: [your-email]
-- Twitter: [your-twitter-handle]
-- LinkedIn: [your-linkedin-profile]
+- Email: [princeokyereboadu@gmail.com]
+- WhatsApp: [https://wa.me/<+233245844828>]
+- LinkedIn: [www.linkedin.com/in/prince-okyere-boadu]
 
 ---
 
 ## Troubleshooting
 Check the FAQ section for common issues. Open an issue on GitHub for support.
+
+---
+
+## FAQ
+- **Q: How do I install the required dependencies?**
+  - A: Run `pip install -r requirements.txt`
+  
+- **Q: How do I train a model?**
+  - A: Run `python train.py --model=xgboost`
+  
+- **Q: How do I make predictions?**
+  - A: Run `python predict.py --model=xgboost`
+  
+- **Q: How do I report a security vulnerability?**
+  - A: Email [princeokyereboadu@gmail.com] or open an issue on GitHub.
 
 ---
 
@@ -203,8 +219,7 @@ This project is actively maintained. For support, please open an issue on GitHub
 
 ### Support Channels
 - GitHub Issues: For bug reports, feature requests, and general support.
-- Email: [your-email] for sensitive or urgent issues.
-- Twitter: [your-twitter-handle] for general inquiries.
+- Email: [princeokyereboadu@gmail.com] for sensitive or urgent issues.
 
 ---
 
@@ -240,29 +255,4 @@ Decisions are made through consensus among maintainers.
 
 ### Communication Channels
 - **GitHub Discussions**: For general discussions and feedback.
-- **Slack**: For real-time communication among maintainers.
-
----
-
-## Release Process
-Releases are made quarterly or as needed.
-
-### Release Checklist
-- **Test**: Ensure all tests pass.
-- **Document**: Update documentation.
-- **Review**: Review code changes.
-
----
-
-## Roadmap
-This project's roadmap is available on GitHub.
-
-### Future Development
-- **Machine Learning**: Integrate additional algorithms.
-- **Real-time Processing**: Implement real-time data processing.
-- **Mobile Application**: Develop mobile application for customer engagement.
-
----
-
-## Appendix
-### Glossary
+- **Slack**: For real-time communication
