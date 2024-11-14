@@ -1,69 +1,74 @@
 import streamlit as st
 import pandas as pd
 
-
-
 def data_page():
-    st.title("This is the Data Page")
-
+    # Page title and sidebar introduction
+    st.title("DATA OVERVIEW")
     st.sidebar.title("Data Understanding")
-    st.sidebar.write("This helps you to understand the data that you will use")
-
-    columns_description ={"Gender": "Whether the customer is a male or a female",
-        "SeniorCitizen": "Whether a customer is a senior citizen or not",
-        "Partner": "Whether the customer has a partner or not (Yes, No)",
-        "Dependents": "Whether the customer has dependents or not (Yes, No)",
-        "Tenure": "Number of months the customer has stayed with the company",
-        "Phone Service": "Whether the customer has a phone service or not (Yes, No)",
-        "MultipleLines": "Whether the customer has multiple lines or not",
-        "InternetService": "Customer's internet service provider (DSL, Fiber Optic, No)",
-        "OnlineSecurity": "Whether the customer has online security or not (Yes, No, No Internet)",
-        "OnlineBackup": "Whether the customer has online backup or not (Yes, No, No Internet)",
-        "DeviceProtection": "Whether the customer has device protection or not (Yes, No, No Internet)",
-        "TechSupport": "Whether the customer has tech support or not (Yes, No, No Internet)",
-        "StreamingTV": "Whether the customer has streaming TV or not (Yes, No, No Internet)",
-        "StreamingMovies": "Whether the customer has streaming movies or not (Yes, No, No Internet)",
-        "Contract": "The contract term of the customer (Month-to-Month, One year, Two year)",
-        "PaperlessBilling": "Whether the customer has paperless billing or not (Yes, No)",
-        "Payment Method": "The customer's payment method (Electronic check, mailed check, Bank transfer(automatic), Credit card(automatic))",
-        "MonthlyCharges": "The amount charged to the customer monthly",
-        "TotalCharges": "The total amount charged to the customer",
-        "Churn": "Whether the customer churned or not (Yes or No)"
+    st.sidebar.write("This page helps you explore and understand the data used in this project.")
+    
+    # Descriptions for columns
+    columns_description = {
+        "Gender": "Whether the customer is male or female",
+        "SeniorCitizen": "Whether the customer is a senior citizen or not",
+        "Partner": "Whether the customer has a partner (Yes, No)",
+        "Dependents": "Whether the customer has dependents (Yes, No)",
+        "Tenure": "Months the customer has been with the company",
+        "Phone Service": "Whether the customer has phone service (Yes, No)",
+        "MultipleLines": "Whether the customer has multiple lines",
+        "InternetService": "Customer's internet provider (DSL, Fiber Optic, No)",
+        "OnlineSecurity": "Whether the customer has online security (Yes, No, No Internet)",
+        "OnlineBackup": "Whether the customer has online backup (Yes, No, No Internet)",
+        "DeviceProtection": "Whether the customer has device protection (Yes, No, No Internet)",
+        "TechSupport": "Whether the customer has tech support (Yes, No, No Internet)",
+        "StreamingTV": "Whether the customer has streaming TV (Yes, No, No Internet)",
+        "StreamingMovies": "Whether the customer has streaming movies (Yes, No, No Internet)",
+        "Contract": "The contract term (Month-to-Month, One year, Two year)",
+        "PaperlessBilling": "Whether the customer has paperless billing (Yes, No)",
+        "Payment Method": "The payment method (Electronic check, Mailed check, Bank transfer, Credit card)",
+        "MonthlyCharges": "Monthly amount charged to the customer",
+        "TotalCharges": "Total amount charged to the customer",
+        "Churn": "Whether the customer churned (Yes, No)"
     }
 
-    col1,col2 =st.columns(2)
+    # Load dataset (add correct path to your CSV file)
+    dataset_path = "data/train_set.csv"
+    try:
+        data = pd.read_csv(dataset_path)
+    except FileNotFoundError:
+        st.error(f"Dataset not found at path: {dataset_path}")
+        return
+    
+    # Column selection for descriptions and data filtering
+    col1, col2 = st.columns(2)
 
     with col1:
-        selected_column =st.selectbox(
-        "Select a column to see its description",
-        list(columns_description.keys()),
-        key ="columns_description_select" )
+        # Show description for selected column
+        selected_column = st.selectbox(
+            "Select a column to view its description:",
+            list(columns_description.keys())
+        )
+        st.write(f"**{selected_column}**: {columns_description[selected_column]}")
 
     with col2:
-        def filter_column(data):
-            data_type =st.selectbox("Select Data type",
-                          ["All", "Numerical columns","Categorical columns"])
-    
-            if data_type == "Numerical columns":
-                data = data.select_dtypes(include =["number"])
-            elif data_type == "Categorical columns":
-                data = data.select_dtypes(include =["object","category"])
-                                      
-            st.write(data)
-    
-     # add the path to the data 
-        dataset_path = "data/train_set.csv"
-
-        data =pd.read_csv(dataset_path)
-        filter_column(data)
-
-
-
-
-
-
-
+        # Filter and display data based on type selection
+        data_type = st.selectbox("Select Data Type to Display", ["All", "Numerical", "Categorical"])
         
+        if data_type == "Numerical":
+            filtered_data = data.select_dtypes(include=["number"])
+        elif data_type == "Categorical":
+            filtered_data = data.select_dtypes(include=["object", "category"])
+        else:
+            filtered_data = data
 
+        st.write("### Filtered Data")
+        st.write(filtered_data)
+    
+    # Display full dataset in an expandable section
+    with st.expander("View Full Dataset"):
+        st.dataframe(data)
 
+    # Summary statistics for quick insights
+    st.write("### Dataset Summary")
+    st.write(data.describe(include="all"))
 

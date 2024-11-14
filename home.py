@@ -11,7 +11,7 @@ def home_page():
              use_column_width=True)
 
     # Project Overview with detailed explanation
-    st.header('Project Overview')
+    st.header('HOME: PROJECT DESCRIPTION')
     st.write('''
     Welcome to our advanced telecommunications customer churn prediction platform. This system leverages 
     machine learning algorithms to identify customers at risk of discontinuing their services, enabling 
