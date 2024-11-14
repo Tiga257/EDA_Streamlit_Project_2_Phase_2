@@ -3,6 +3,8 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
+import plotly.graph_objects as go
+import plotly.express as px
 
 # Dashboard page
 def dashboard_page():
@@ -123,4 +125,80 @@ def dashboard_page():
     ax.set_xlabel("Senior Citizen")
     ax.set_ylabel("Frequency")
     st.pyplot(fig)
+
+
+    st.title("BIVARIATE ANALYSIS")
+        # Scatter Plots
+    st.subheader("Tenure vs Monthly Charges")
+    fig, ax = plt.subplots()
+    sns.scatterplot(x="Tenure", y="MonthlyCharges", data=data, ax=ax)
+    st.pyplot(fig)
+
+    # Regression Plots
+    st.subheader("Tenure vs Monthly Charges Regression")
+    fig, ax = plt.subplots()
+    sns.regplot(x="Tenure", y="MonthlyCharges", data=data, ax=ax)
+    st.pyplot(fig)
+
+    # Box Plots
+    st.subheader("Churn vs Monthly Charges")
+    fig, ax = plt.subplots()
+    sns.boxplot(x="Churn", y="MonthlyCharges", data=data, ax=ax)
+    st.pyplot(fig)
+
+    # Violin Plots
+    st.subheader("Churn vs Monthly Charges")
+    fig, ax = plt.subplots()
+    sns.violinplot(x="Churn", y="MonthlyCharges", data=data, ax=ax)
+    st.pyplot(fig)
+
+    # Heatmaps
+    st.subheader("Gender vs Churn Heatmap")
+    fig, ax = plt.subplots()
+    sns.heatmap(pd.crosstab(data["Gender"], data["Churn"]), ax=ax, annot=True, cmap="coolwarm")
+    st.pyplot(fig)
+
+    # Stacked Bar Charts
+    st.subheader("Gender vs Churn Stacked Bar Chart")
+    fig, ax = plt.subplots()
+    pd.crosstab(data["Gender"], data["Churn"]).plot(kind="bar", stacked=True, ax=ax)
+    st.pyplot(fig)
+
+    st.title("MULTIVARIATE ANALYSIS")   
+        # Pair Plots
+    st.subheader("Pair Plot of Numerical Variables")
+    fig, ax = plt.subplots()
+    sns.pairplot(data[["Tenure", "MonthlyCharges", "TotalCharges"]])
+    st.pyplot(fig)
+
+    # 3D Scatter Plots
+    st.subheader("3D Scatter Plot of Numerical Variables")
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    ax.scatter(data["Tenure"], data["MonthlyCharges"], data["TotalCharges"])
+    st.pyplot(fig)
+
+    # Clustered Bar Charts
+    st.subheader("Clustered Bar Chart of Categorical Variables")
+    fig, ax = plt.subplots()
+    pd.crosstab(data["Gender"], [data["Churn"], data["SeniorCitizen"]]).plot(kind="bar", ax=ax)
+    st.pyplot(fig)
+
+    # Sankey Diagrams
+    st.subheader("Sankey Diagram of Categorical Variables")
+    
+    fig = go.Figure(data=[go.Sankey(link = dict(source = [0, 1, 2], target = [1, 2, 0], value = [8, 4, 2]))])
+    st.plotly_chart(fig)
+
+    # Parallel Coordinates Plots
+    st.subheader("Parallel Coordinates Plot of Mixed Variables")
+   
+    fig = px.parallel_coordinates(data, color="Churn")
+    st.plotly_chart(fig)
+
+    # Radial Plots
+    st.subheader("Radial Plot of Mixed Variables")
+    import plotly.graph_objects as go
+    fig = go.Figure(data=go.Scatterpolar(r=data["MonthlyCharges"], theta=data["Tenure"], fill='toself', name="Customers"))
+    st.plotly_chart(fig)
 
