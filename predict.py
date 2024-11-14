@@ -117,6 +117,57 @@ def predict_page():
         st.write(f"Prediction: {'Churn' if prediction == 1 else 'Not Churn'}")
         st.write(f"Churn Probability: {probability:.2f}%")
 
+
+    #Bulk Predicition
+    st.header("Bulk Prediction")
+    st.write("Upload a CSV file with customer data")
+
+    upload_file =st.file_uploader("Choose the file to upload", type ='csv')
+    if upload_file is not None:
+        try:
+            bulk_data =pd.read_csv(upload_file)
+            st.write("Data Preview", bulk_data.head())
+
+            #required columns
+            required_columns =[
+                'gender', 'SeniorCitizen', 'Partner', 'Dependents', 'tenure',
+                'PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity',
+                'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV',
+                'StreamingMovies', 'Contract', 'PaperlessBilling', 'PaymentMethod',
+                'MonthlyCharges', 'TotalCharges'
+            ]
+            
+
+            if all(col in bulk_data.columns for col in required_columns):
+
+                bulk_predictions =pipeline.predict(bulk_data)
+                bulk_probability =pipeline.predict_proba(bulk_data)[:,1]*100
+
+                #display results
+                bulk_results =bulk_data.copy()
+                bulk_results["Predictions"] =['Churn' if pred ==1 else 'Not Churn' for pred in bulk_predictions]
+                bulk_results['Churned Probability'] = bulk_probability
+
+                st.write("Bulk Prediction Results:")
+                st.dataframe(bulk_results)
+
+
+                # save the results
+                result_file ="data/bulk_predictions.csv"
+                bulk_results.to_csv(result_file, index =False)
+                st.success(f"Results saved successfully to{result_file}")
+            else:
+                st.error("Upload csv not the same columns")
+        except Exception as e:
+            st.error(f"Error during bulk prediction")
+
+    if __name__ =="__main__":
+         predict_page()
+
+
+
+
+
 # Entry point for Streamlit app
 if __name__ == "__main__":
     predict_page()
