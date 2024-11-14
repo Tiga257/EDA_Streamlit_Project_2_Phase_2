@@ -5,7 +5,7 @@ import pandas as pd
 # load the pipeline
 @st.cache_resource
 def load_pipeline():
-    with(open('models/premodel.pkl', 'rb') as file):
+    with(open('models/pipelist.pkl', 'rb') as file):
         return pickle.load(file)
     
 def load_model(filename):
@@ -66,11 +66,11 @@ def predict_page():
 
         # create a dataframe for the single data
         data = pd.DataFrame({
-        'gender': [gender],
+        'Gender': [gender],
         'SeniorCitizen': [senior_citizen],
         'Partner': [partner],
         'Dependents': [dependents],
-        'tenure': [tenure],
+        'Tenure': [tenure],
         'PaperlessBilling': [paperless_billing],
         'PaymentMethod': [payment_method],
         'MonthlyCharges': [monthly_charges],
