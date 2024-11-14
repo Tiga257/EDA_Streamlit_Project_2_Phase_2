@@ -300,17 +300,17 @@ def dashboard_page():
     """)
 
     # Parallel Coordinates Plot of Mixed Variables
-    st.subheader("Parallel Coordinates Plot of Mixed Variables")
-    fig = px.parallel_coordinates(
-        data, color="Churn", labels={"Tenure": "Tenure", "MonthlyCharges": "Monthly Charges", "TotalCharges": "Total Charges"},
-        color_continuous_scale=px.colors.diverging.Tealrose, title="Parallel Coordinates: Tenure, Monthly Charges, Total Charges, Churn"
-    )
-    st.plotly_chart(fig)
+    # st.subheader("Parallel Coordinates Plot of Mixed Variables")
+    # fig = px.parallel_coordinates(
+        # data, color="Churn", labels={"Tenure": "Tenure", "MonthlyCharges": "Monthly Charges", "TotalCharges": "Total Charges"},
+        # color_continuous_scale=px.colors.diverging.Tealrose, title="Parallel Coordinates: Tenure, Monthly Charges, Total Charges, Churn"
+    #)
+    # st.plotly_chart(fig)
 
-    st.markdown("""
-    **Interpretation:** This parallel coordinates plot illustrates the relationship between multiple variables and churn.
-    - **Patterns**: Variations in line patterns and color indicate how changes in 'Tenure', 'Monthly Charges', and 'Total Charges' relate to churn.
-    """)
+    # st.markdown("""
+    #**Interpretation:** This parallel coordinates plot illustrates the relationship between multiple variables and churn.
+    #- **Patterns**: Variations in line patterns and color indicate how changes in 'Tenure', 'Monthly Charges', and 'Total Charges' relate to churn.
+    #""")
 
     # Radial Plot of Mixed Variables
     st.subheader("Radial Plot of Mixed Variables")
