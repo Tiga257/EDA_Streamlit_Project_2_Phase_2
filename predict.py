@@ -36,8 +36,8 @@ def load_model(model_path):
 
 
 def predict_page():
-    st.title("PREDICTION EXECUTION")
-    st.sidebar.title("Predict View")
+    st.title("PREDICT EXECUTION")
+    st.sidebar.title("Predict Section")
     st.sidebar.write('''Users are allowed to input data and receive 
                      predictions based on a trained machine learning model.
                      ''')
