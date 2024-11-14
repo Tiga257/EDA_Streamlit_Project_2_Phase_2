@@ -1,63 +1,112 @@
+# Save this as home.py
 import streamlit as st
-from PIL import Image
-
-
-#image=Image.open(r"C:\Users\ADMIN\Downloads\feature-beth-blog-feb2022.jpg")
-#st.image(Image)
 
 def home_page():
-    st.title("Welcome to the home page")
-    st.write("Telco Churn Classification Project")
-    st.markdown(""" This uses machine learning to classify whether a customer is likely to churn or not""")
-    st.subheader("Instructions")
-    st.markdown("""
-                - Upload a csv file
-                - Select the features for classification
-                - Choose a machine learning model from the dropdown
-                - Click on'Classify' to get the predicted results
-                - The app gives you a report on the performance of the model
-                - Expect it to give metrics like f1 score, recall, precision and accuracy
-                """)
+    # Title and Header
+    st.title('Telco Customer Churn Prediction System')
+    
+    # Hero Image
+    st.image('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop', 
+             caption='Advanced Analytics Dashboard', 
+             use_column_width=True)
 
-    st.header("App Features")
-    st.markdown("""
-                - **Data View**:Access the customer data.
-                - **Predict View**:Shows the various models and predictions you will make.
-                - **Dashboard**:Show data visualizations for insights.
-                """)
+    # Project Overview with detailed explanation
+    st.header('Project Overview')
+    st.write('''
+    Welcome to our advanced telecommunications customer churn prediction platform. This system leverages 
+    machine learning algorithms to identify customers at risk of discontinuing their services, enabling 
+    proactive retention strategies.
+    ''')
+
+    # Comprehensive Features Section
+    st.subheader('Advanced Features')
+    col1, col2 = st.columns(2)
     
-    st.subheader("User Benefits")
-    st.markdown("""
-                - **Data Driven Decisions**:You make an informed decison.
-                - **Access Machine Learning**:Utilize machine learning
-                """)
-    
-    st.write("### How to Run the application")
-    with st.container(border=True):
-        st.code("""
-                # Activate the virtual environment
-                env/scripts/activate
-                
-                # Run the App
-                streamlit run p.py
-                        """)
+    with col1:
+        st.markdown('''
+        **Predictive Analytics:**
+        - Real-time churn probability scoring
+        - Customer behavior pattern analysis
+        - Risk factor identification
+        - Historical trend analysis
+        - Automated alert systems
+        ''')
         
-    # adding embedded link
-    #st.video("Telco_churnr… (2) - JupyterLab and 2 more pages - Personal - Microsoft​ Edge 2024-11-07 18-36-09")
+    with col2:
+        st.markdown('''
+        **Visualization Tools:**
+        - Interactive dashboards
+        - Customer segmentation maps
+        - Trend analysis graphs
+        - Feature importance plots
+        - ROC and PR curves
+        ''')
 
-    # adding clickable link
-    #st.markdown("Telco_churnr… (2) - JupyterLab and 2 more pages - Personal - Microsoft​ Edge 2024-11-07 18-36-09")
+    # Technical Capabilities
+    st.subheader('Technical Specifications')
+    st.markdown('''
+    **Machine Learning Models:**
+    - Random Forest Classifier
+    - XGBoost Algorithm
+    - Logistic Regression
+    - Support Vector Machines
+    - Neural Networks
     
-    #adding an image/method 1
-    #st.image(r"C:\Users\ADMIN\Downloads\download.jpg")
+    **Data Processing Capabilities:**
+    - Automated data cleaning
+    - Feature engineering
+    - Missing value imputation
+    - Outlier detection
+    - Data normalization
+    ''')
 
-    #adding an image/method 2
-    #install pillow -- from PIL import Image
-    #image=Image.open(r"C:\Users\ADMIN\Downloads\feature-beth-blog-feb2022.jpg")
-    #st.image(Image)
+    # Implementation Guide
+    st.subheader('Implementation Process')
+    st.markdown('''
+    1. **Data Integration**
+       - Upload customer demographic data
+       - Import service usage metrics
+       - Connect billing information
+       - Sync customer interaction history
+    
+    2. **Analysis Configuration**
+       - Select relevant features
+       - Choose prediction timeframe
+       - Set alert thresholds
+       - Configure model parameters
+    
+    3. **Model Deployment**
+       - Train selected algorithms
+       - Validate model performance
+       - Deploy prediction pipeline
+       - Monitor accuracy metrics
+    
+    4. **Results Interpretation**
+       - View prediction outcomes
+       - Analyze feature importance
+       - Export detailed reports
+       - Track model performance
+    ''')
 
-    st.divider()
-    st.write("====" * 15)
+    # Performance Metrics
+    st.subheader('Performance Analytics')
+    st.markdown('''
+    **Key Metrics Tracked:**
+    - Model Accuracy: Precision in identifying at-risk customers
+    - F1 Score: Balance between precision and recall
+    - ROC-AUC: Overall model discrimination ability
+    - Confusion Matrix: Detailed prediction breakdown
+    - Feature Importance: Key churn indicators
+    ''')
 
-    st.write("Need Help?")
-    st.write("Contact me on: https://github.com/2Patty")
+    # System Requirements
+    st.subheader('System Requirements')
+    st.code('''
+    Python >= 3.8
+    Memory: 8GB minimum
+    Storage: 50GB recommended
+    CPU: 4+ cores recommended
+    GPU: Optional for neural networks
+    ''')
+
+print("Created detailed home.py with comprehensive sections")
