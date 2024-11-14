@@ -1,90 +1,126 @@
-import streamlit as st
 import pandas as pd
+import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.preprocessing import LabelEncoder
 
-
+# Dashboard page
 def dashboard_page():
-    st.title("Customer Churn Dashboard Page")
+    st.title("Dashboard")
 
-# load the data
-    data =pd.read_csv("data/train_set.csv")
-
-    st.header("Data Overview")
-    st.write("Here is a quick summary of the dataset")
-    st.dataframe(data.head())
+    # Load data
+    data = pd.read_csv("data/train_set.csv")
 
      # Calculate KPIs
-    total_customers = len(data)
-    churn_rate = round((data['Churn'].value_counts().iloc[1] / total_customers) * 100, 2)
-    avg_tenure = round(data['tenure'].mean(), 2)
+    churn_rate = data["Churn"].value_counts(normalize=True)[1] * 100
+    avg_tenure = data["Tenure"].mean()
+    avg_monthly_charges = data["MonthlyCharges"].mean()
+    senior_citizen_ratio = data["SeniorCitizen"].value_counts(normalize=True)[1] * 100
+    gender_balance_male = data["Gender"].value_counts(normalize=True)["Male"] * 100
+    gender_balance_female = data["Gender"].value_counts(normalize=True)["Female"] * 100
 
-    # Display KPIs
+    # Dashboard
+    st.title("KPI Dashboard")
+
+    # Data Preview
+    st.write("---")
+    st.subheader("Data Preview")
+    st.dataframe(data.head(10))
+
+    # Row 1
+    st.write("---")
     col1, col2, col3 = st.columns(3)
-    with col1:
-        st.metric("Total Customers", total_customers)
-    with col2:
-        st.metric("Churn Rate", f"{churn_rate}%")
-    with col3:
-        st.metric("Average Tenure", f"{avg_tenure} months")
+    col1.metric("Churn Rate", f"{churn_rate:.2f}%")
+    col2.metric("Average Tenure", f"{avg_tenure:.2f} months")
+    col3.metric("Average Monthly Charges", f"$ {avg_monthly_charges:.2f}")
 
-    st.subheader("Interactive Visualization")
+    # Row 2
+    col4, col5, col6 = st.columns(3)
+    col4.metric("Senior Citizen Ratio", f"{senior_citizen_ratio:.2f}%")
+    col5.metric("Gender Balance (Male)", f"{gender_balance_male:.2f}%")
+    col6.metric("Gender Balance (Female)", f"{gender_balance_female:.2f}%")
 
-        # Selectbox for variable selection
-    variable = st.selectbox("Select a variable", options=["tenure", "MonthlyCharges", "TotalCharges"])
+    # Plots
+    st.write("---")
+    st.subheader("Distributions")
 
-   # Create an interactive scatter plot
-    plt.figure(figsize=(10, 6))
-    sns.scatterplot(x=variable, y="TotalCharges", hue="Churn", data=data, palette="coolwarm")
-    plt.title(f"Total Charges vs. {variable} by Churn Status")
-    st.pyplot(plt)
+    # Churn Distribution
+    col7, col8 = st.columns(2)
+    with col7:
+        fig, ax = plt.subplots()
+        sns.countplot(data["Churn"], ax=ax)
+        ax.set_title("Churn Distribution")
+        ax.set_xlabel("Churn")
+        ax.set_ylabel("Frequency")
+        st.pyplot(fig)
 
-# do a correlation heatmap
-    # heat map Tenure vs Totalcharges
-    st.subheader("Correlation Heatmap")
-    corr= data[["tenure", "MonthlyCharges"]].corr()
-    plt.figure(figsize =(10, 6))
-    sns.heatmap(corr, annot =True, cmap="coolwarm")
-    st.pyplot(plt)
+    # Tenure Distribution
+    with col8:
+        fig, ax = plt.subplots()
+        sns.histplot(data["Tenure"], ax=ax, bins=10)
+        ax.set_title("Tenure Distribution")
+        ax.set_xlabel("Tenure")
+        ax.set_ylabel("Frequency")
+        st.pyplot(fig)
 
-     #violinplot churn vs totalcharges
-    st.subheader("Total Charges vs. Tenure (Churned vs. Non-Churned)")
-    plt.figure(figsize=(10, 6))
-    sns.violinplot(x="Churn", y="TotalCharges", hue="Churn", data=data, split=True)
-    plt.title("Total Charges vs. Tenure by Churn Status")
-    plt.xlabel("Tenure (Months)")
-    plt.ylabel("Total Charges")
-    st.pyplot(plt)
+    # Monthly Charges Distribution
+    st.write("---")
+    fig, ax = plt.subplots()
+    sns.histplot(data["MonthlyCharges"], ax=ax, bins=10)
+    ax.set_title("Monthly Charges Distribution")
+    ax.set_xlabel("Monthly Charges")
+    ax.set_ylabel("Frequency")
+    st.pyplot(fig)
 
-    # countplot internet service
-    st.subheader("Internet Service")
-    plt.figure(figsize=(8,5))
-    sns.countplot(x="InternetService", data=data, hue ="InternetService", palette="viridis",legend=False )
-    plt.title("Distribution of Internet Service Types")
-    plt.xlabel("Internet Service")
-    plt.ylabel("Count")
-    st.pyplot(plt)
 
-    #correlation matrix heatmap
-    st.subheader("Correlation Matrix")
-    plt.figure(figsize=(10, 8))
-    sns.heatmap(data[['tenure', 'MonthlyCharges', 'TotalCharges']].corr(), annot=True, cmap="YlGnBu")
-    plt.title("Correlation Matrix of Key Features")
-    st.pyplot(plt)
 
-    #scatterplot tenure vs monthlycharges
-    plt.figure(figsize=(10, 6))
-    sns.scatterplot(x="tenure", y="MonthlyCharges", hue="Churn", data=data, palette="coolwarm")
-    plt.title("Monthly Charges vs. Tenure by Churn Status")
-    plt.xlabel("Tenure (Months)")
-    plt.ylabel("Monthly Charges")
-    st.pyplot(plt)
+    # Histograms
+    st.subheader("Tenure Distribution")
+    fig, ax = plt.subplots()
+    data["Tenure"].plot.hist(ax=ax)
+    ax.set_title("Tenure Distribution")
+    ax.set_xlabel("Tenure")
+    ax.set_ylabel("Frequency")
+    st.pyplot(fig)
 
-    #boxplot tenure vs contract
-    st.subheader("Tenure by Contract Type")
-    plt.figure(figsize=(10, 6))
-    sns.boxplot(x="Contract", y="tenure", data=data, hue="Contract", palette="coolwarm", dodge=False)
-    plt.title("Tenure Distribution by Contract Type")
-    plt.xlabel("Contract Type")
-    plt.ylabel("Tenure (Months)")
-    st.pyplot(plt)
+    # Box Plots
+    st.subheader("Monthly Charges Distribution")
+    fig, ax = plt.subplots()
+    data["MonthlyCharges"].plot.box(ax=ax)
+    ax.set_title("Monthly Charges Distribution")
+    ax.set_xlabel("Monthly Charges")
+    st.pyplot(fig)
+
+    # Density Plots
+    st.subheader("Total Charges Distribution")
+    fig, ax = plt.subplots()
+    sns.kdeplot(data["TotalCharges"], ax=ax)
+    ax.set_title("Total Charges Distribution")
+    ax.set_xlabel("Total Charges")
+    st.pyplot(fig)
+
+    # Bar Charts
+    st.subheader("Gender Distribution")
+    fig, ax = plt.subplots()
+    data["Gender"].value_counts().plot(kind="bar", ax=ax)
+    ax.set_title("Gender Distribution")
+    ax.set_xlabel("Gender")
+    ax.set_ylabel("Frequency")
+    st.pyplot(fig)
+
+    # Pie Charts
+    st.subheader("Churn Distribution")
+    fig, ax = plt.subplots()
+    data["Churn"].value_counts().plot(kind="pie", autopct="%1.1f%%", ax=ax)
+    ax.set_title("Churn Distribution")
+    st.pyplot(fig)
+
+    # Count Plots
+    st.subheader("Senior Citizen Distribution")
+    fig, ax = plt.subplots()
+    sns.countplot(data["SeniorCitizen"], ax=ax)
+    ax.set_title("Senior Citizen Distribution")
+    ax.set_xlabel("Senior Citizen")
+    ax.set_ylabel("Frequency")
+    st.pyplot(fig)
+

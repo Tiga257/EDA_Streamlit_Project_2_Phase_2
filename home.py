@@ -41,46 +41,59 @@ def home_page():
         - Feature importance plots
         - ROC and PR curves
         ''')
+    
 
     # Technical Capabilities
     st.subheader('Technical Specifications')
-    st.markdown('''
-    **Machine Learning Models:**
-    - Random Forest Classifier
-    - XGBoost Algorithm
-    - Logistic Regression
-    - Support Vector Machines
-    - Neural Networks
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown('''
+        **Machine Learning Models:**
+        - Random Forest Classifier
+        - XGBoost Algorithm
+        - Logistic Regression
+        - Support Vector Machines
+        - Neural Networks
+        ''')
     
-    **Data Processing Capabilities:**
-    - Automated data cleaning
-    - Feature engineering
-    - Missing value imputation
-    - Outlier detection
-    - Data normalization
-    ''')
+    with col2:
+        st.markdown(''' 
+        **Data Processing Capabilities:**
+        - Automated data cleaning
+        - Feature engineering
+        - Missing value imputation
+        - Outlier detection
+        - Data normalization
+        ''')
 
     # Implementation Guide
     st.subheader('Implementation Process')
-    st.markdown('''
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown('''
     1. **Data Integration**
        - Upload customer demographic data
        - Import service usage metrics
        - Connect billing information
        - Sync customer interaction history
-    
+
     2. **Analysis Configuration**
        - Select relevant features
        - Choose prediction timeframe
        - Set alert thresholds
        - Configure model parameters
-    
+        ''')
+
+    with col2:
+        st.markdown('''
     3. **Model Deployment**
        - Train selected algorithms
        - Validate model performance
        - Deploy prediction pipeline
        - Monitor accuracy metrics
-    
+   
     4. **Results Interpretation**
        - View prediction outcomes
        - Analyze feature importance
