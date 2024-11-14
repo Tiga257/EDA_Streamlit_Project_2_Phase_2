@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.preprocessing import LabelEncoder
+import plotly
 import plotly.graph_objects as go
 import plotly.express as px
 from mpl_toolkits.mplot3d import Axes3D
@@ -62,7 +62,7 @@ def dashboard_page():
         ax.set_xlabel("Churn", color="darkblue")
         ax.set_ylabel("Frequency", color="darkblue")
         st.pyplot(fig)
-        
+
     with col2:
         # Subheading for Senior Citizen Distribution
         st.subheader("Senior Citizen Distribution")
