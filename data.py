@@ -3,9 +3,13 @@ import pandas as pd
 
 def data_page():
     # Page title and sidebar introduction
-    st.title("DATA OVERVIEW")
-    st.sidebar.title("Data Understanding")
-    st.sidebar.write("This page helps you explore and understand the data used in this project.")
+    st.title("DATA SECTION")
+    st.sidebar.title("Data Section")
+    st.sidebar.write(
+        '''View of the data used in the application, 
+                     enabling users to explore, filter, and download data 
+                     for further analysis.
+                     ''')
     
     # Descriptions for columns
     columns_description = {

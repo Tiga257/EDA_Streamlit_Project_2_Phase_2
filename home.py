@@ -4,6 +4,7 @@ import streamlit as st
 def home_page():
     # Title and Header
     st.title('Telco Customer Churn Prediction System')
+    st.sidebar.title("Home Section")
     
     # Hero Image
     st.image('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop', 

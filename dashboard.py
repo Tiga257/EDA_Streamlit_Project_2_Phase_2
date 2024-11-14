@@ -8,7 +8,14 @@ import plotly.graph_objects as go
 
 # Dashboard page
 def dashboard_page():
-    st.title("DASHBOARD")
+    st.title("DASHBOARD SECTION")
+    st.sidebar.title("Dashboard Section")
+    st.sidebar.write('''Visual representation of key performance 
+                     indicators (KPIs), metrics, and data insights, 
+                     displayed in a single, intuitive interface. 
+                     It provides real-time or near-real-time 
+                     information to support informed decision-making
+                     ''')
 
     # Load data
     data = pd.read_csv("data/train_set.csv")
@@ -27,7 +34,7 @@ def dashboard_page():
     # Data Preview
     st.write("---")
     st.subheader("Data Preview")
-    st.dataframe(data.head(10))
+    st.dataframe(data.head(16))
 
     # Row 1
     st.write("---")
@@ -44,6 +51,7 @@ def dashboard_page():
 
     # Plots
     st.write("---")
+    st.header("UNIVARIATE ANALYSIS")
     st.subheader("Distributions")
 
 
@@ -52,7 +60,7 @@ def dashboard_page():
     sns.set(style="whitegrid", palette="pastel")
 
     # Subheading for Churn Analysis
-    st.subheader("Churn Analysis")
+    st.subheader("Churn Distribution")
     col1, col2 = st.columns(2)
     with col1:
         fig, ax = plt.subplots()
@@ -73,7 +81,7 @@ def dashboard_page():
         st.pyplot(fig)
 
     # Subheading for Tenure Distribution
-    st.subheader("Tenure Analysis")
+    st.subheader("Tenure Distribution")
     col3, col4 = st.columns(2)
     with col3:
         fig, ax = plt.subplots()
@@ -83,34 +91,17 @@ def dashboard_page():
         ax.set_ylabel("Frequency", color="darkblue")
         st.pyplot(fig)
 
-    # Subheading for Monthly Charges Analysis
-    st.subheader("Monthly Charges Analysis")
-    col5, col6 = st.columns(2)
-    with col5:
-        fig, ax = plt.subplots()
-        sns.histplot(data["MonthlyCharges"], ax=ax, bins=10, color="lightcoral", edgecolor="black")
-        ax.set_title("Monthly Charges Distribution", color="darkblue", fontsize=15, weight="bold")
-        ax.set_xlabel("Monthly Charges", color="darkblue")
-        ax.set_ylabel("Frequency", color="darkblue")
-        st.pyplot(fig)
-
-    with col6:
+    with col4:
+        # Subheading for Monthly Charges Analysis
+        st.subheader("Monthly Charges Distribution")
         fig, ax = plt.subplots()
         sns.boxplot(x=data["MonthlyCharges"], ax=ax, color="lightgreen")
         ax.set_title("Monthly Charges Box Plot", color="darkblue", fontsize=15, weight="bold")
         ax.set_xlabel("Monthly Charges", color="darkblue")
         st.pyplot(fig)
 
-    # Subheading for Total Charges Density
-    st.subheader("Total Charges Analysis")
-    fig, ax = plt.subplots()
-    sns.kdeplot(data["TotalCharges"], ax=ax, color="purple", shade=True, linewidth=2)
-    ax.set_title("Total Charges Density", color="darkblue", fontsize=15, weight="bold")
-    ax.set_xlabel("Total Charges", color="darkblue")
-    st.pyplot(fig)
-
     # Subheading for Gender and Churn Distribution
-    st.subheader("Demographics Analysis")
+    st.subheader("Demographics")
     col7, col8 = st.columns(2)
     with col7:
         fig, ax = plt.subplots()
@@ -126,8 +117,16 @@ def dashboard_page():
         ax.set_title("Churn Distribution", color="darkblue", fontsize=15, weight="bold")
         st.pyplot(fig)
 
-    
 
+    # Subheading for Total Charges Density
+    st.subheader("Total Charges Distribution")
+    fig, ax = plt.subplots()
+    sns.kdeplot(data["TotalCharges"], ax=ax, color="purple", shade=True, linewidth=2)
+    ax.set_title("Total Charges Density", color="darkblue", fontsize=15, weight="bold")
+    ax.set_xlabel("Total Charges", color="darkblue")
+    st.pyplot(fig)
+
+    
 
 # Sample data (replace with your own DataFrame)
     data = pd.DataFrame({
