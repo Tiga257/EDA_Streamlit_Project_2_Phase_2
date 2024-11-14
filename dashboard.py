@@ -8,7 +8,7 @@ def dashboard_page():
     st.title("Customer Churn Dashboard Page")
 
 # load the data
-    data =pd.read_csv("data/traindata.csv")
+    data =pd.read_csv("data/train_set.csv")
 
     st.header("Data Overview")
     st.write("Here is a quick summary of the dataset")

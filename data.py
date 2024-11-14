@@ -9,7 +9,7 @@ def data_page():
     st.sidebar.title("Data Understanding")
     st.sidebar.write("This helps you to understand the data that you will use")
 
-    columns_description ={"gender": "Whether the customer is a male or a female",
+    columns_description ={"Gender": "Whether the customer is a male or a female",
         "SeniorCitizen": "Whether a customer is a senior citizen or not",
         "Partner": "Whether the customer has a partner or not (Yes, No)",
         "Dependents": "Whether the customer has dependents or not (Yes, No)",
@@ -52,7 +52,7 @@ def data_page():
             st.write(data)
     
      # add the path to the data 
-        dataset_path = "data/traindata.csv"
+        dataset_path = "data/train_set.csv"
 
         data =pd.read_csv(dataset_path)
         filter_column(data)
