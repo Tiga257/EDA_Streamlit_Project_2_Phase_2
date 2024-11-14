@@ -3,7 +3,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.graph_objects as go
-import plotly.express as px
+# import plotly.express as px
 # from mpl_toolkits.mplot3d import Axes3D
 
 # Dashboard page
