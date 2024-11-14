@@ -1,7 +1,7 @@
 import streamlit as st
 import pickle
 import pandas as pd
-from imblearn import pipeline
+
 
                
 # Function to load the pipeline using Streamlit's caching for better performance
