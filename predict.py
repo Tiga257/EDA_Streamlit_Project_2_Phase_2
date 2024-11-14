@@ -47,11 +47,11 @@ def predict_page():
 
     # Model paths dictionary
     models_paths = {
-        'Logistic Regression': os.path.join("Models", "LR_model.pkl"),
-        'RF': os.path.join("Models", "RF_model.pkl"),
-        'GB': os.path.join("Models", "GB_model.pkl"),
-        'KNN': os.path.join("Models", "KNN_model.pkl"),
-        'SVC': os.path.join("Models", "SVC_model.pkl")
+        'Logistic Regression': os.path.join("models", "LR_model.pkl"),
+        'RF': os.path.join("models", "RF_model.pkl"),
+        'GB': os.path.join("models", "GB_model.pkl"),
+        'KNN': os.path.join("models", "KNN_model.pkl"),
+        'SVC': os.path.join("models", "SVC_model.pkl")
     }
 
     # Select and load the chosen model
