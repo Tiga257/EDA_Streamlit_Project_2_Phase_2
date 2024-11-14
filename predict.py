@@ -36,7 +36,7 @@ def load_model(model_path):
 
 
 def predict_page():
-    st.title("Customer Churn Prediction")
+    st.title("PREDICTION EXECUTION")
     st.sidebar.title("Predict View")
     st.sidebar.write("Predict whether a customer will churn")
 
